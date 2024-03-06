@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const { exchangeRates } = require('exchange-rates-api');
 
 router.get('/', async function (req, res) {

@@ -2,18 +2,21 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient
-const dollarRoute = require('./services/api.js');
+const dollarRoute = require('./services/apiGetDollarRate.js');
+const getData = require('./services/apiGetData')
+const { exchangeRates } = require('exchange-rates-api');
 
 require('dotenv').config();
 
 const URL = process.env.URL;
 const PORT = process.env.PORT
 
-
+const dbName = 'mydb'
+const collectionName = 'AverageMonthlyDollar'
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
-
+app.use('/data', getData);
 
 app.listen(PORT,
     console.log(`Server started on port ${PORT}`)
@@ -45,7 +48,13 @@ async function insertOne() {
         await client.connect();
         const database = client.db("mydb");
         const newItem = database.collection("AverageMonthlyDollar");
-        const document = { date: "01/02/24", avarege: 2.1 };
+        const currentDate = new Date()
+        const previousMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+        const data = {
+            date: previousMonth,
+            average: await exchangeRates().latest().symbols('USD').fetch()
+        };
+        const document = data
         const result = await newItem.insertOne(document);
         console.log(
             `documents were inserted with the _id: ${result.insertedId}`,
@@ -54,4 +63,17 @@ async function insertOne() {
         await client.close();
     }
 }
-insertOne().catch(console.dir);
+insertOne().catch(console.error);
+
+const collection = client.db(dbName).collection(collectionName);
+async function find() {
+    try {
+        await client.connect();
+        const database = client.db("mydb");
+        const findAll = database.collection("AverageMonthlyDollar");
+        const result = await findAll.findOne(({}, { _id: 0 }))
+    } finally {
+        await client.close();
+    }
+}
+const data = find().catch(console.error);
