@@ -10,13 +10,13 @@ import "./App.css";
 Chart.register(CategoryScale);
 
 function App() {
-  const [message, setMessage] = useState("");
+  const [arr, setMessage] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:8080/api")
+    fetch("http://localhost:8080/data")
       .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
+      .then((data) => setMessage(data.arr));
+  });
 
   const [chartData] = useState({
     labels: Data.map((data) => data.year),
@@ -39,11 +39,10 @@ function App() {
   return (
     <div className="App">
 
-      <div className="App">
-        <LineChart chartData={chartData} />
-      </div>
-      <h1>{message}</h1>
+      <LineChart chartData={chartData} />
+      <h1>{arr}</h1>
     </div>
+
   );
 }
 export default App;
