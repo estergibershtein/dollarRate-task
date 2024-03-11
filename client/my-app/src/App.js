@@ -3,22 +3,24 @@ import { CategoryScale } from "chart.js";
 import { Data } from "./Components/data";
 import "./index";
 import LineChart from "./Components/LineChart";
-import './App.css';
-
+import MonthScroll from './Components/MonthScroll'
+import DollarTable from './Components/DollarTable'
 import React, { useState, useEffect } from "react";
 import "./App.css";
 Chart.register(CategoryScale);
 
 function App() {
-  const [arr, setMessage] = useState();
+  const [data, setData] = useState();
 
   useEffect(() => {
     fetch("http://localhost:8080/data")
       .then((res) => res.json())
-      .then((data) => setMessage(data.arr));
+      .then((data) => setData(data));
   });
 
   const [chartData] = useState({
+
+
     labels: Data.map((data) => data.year),
     datasets: [
       {
@@ -36,11 +38,14 @@ function App() {
       }
     ]
   })
+
+
   return (
     <div className="App">
 
       <LineChart chartData={chartData} />
-      <h1>{arr}</h1>
+      <MonthScroll />
+      <DollarTable />
     </div>
 
   );

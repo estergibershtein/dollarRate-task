@@ -7,24 +7,20 @@ const URL = process.env.URL;
 const dbName = 'mydb'
 const collectionName = 'AverageMonthlyDollar'
 
-async function creatConnect() {
-    MongoClient.connect('mongodb://172.17.0.5:27017/', function (err, db) {
+MongoClient.connect('mongodb://172.17.0.5:27017/', function (err, db) {
+    if (err) throw err;
+    var dbo = db.db(dbName);
+    dbo.createCollection(collectionName, function (err, res) {
         if (err) throw err;
-        var dbo = db.db(dbName);
-        dbo.createCollection(collectionName, function (err, res) {
-            if (err) throw err;
-            console.log("Collection created!");
-            db.close();
-        });
+        console.log("Collection created!");
+        db.close();
     });
-}
+});
 
 const client = new MongoClient('mongodb://172.17.0.5:27017/', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
-
-
 async function find() {
     try {
         await client.connect();
