@@ -21,7 +21,7 @@ function App() {
   const [chartData] = useState({
 
 
-    labels: Data.map((data) => data.year),
+    labels: Data.map((data) => data.date),
     datasets: [
       {
         label: "avarege dollar Rate",

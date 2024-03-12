@@ -4,6 +4,11 @@ const CronJob = require('cron').CronJob;
 const MongoClient = require('mongodb').MongoClient
 const fetchDolarRate = require('../services/ApiGgetDollarRate')
 
+
+const dbName = 'mydb'
+const collectionName = 'AverageMonthlyDollar'
+
+
 const client = new MongoClient('mongodb://172.17.0.5:27017/', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -14,7 +19,6 @@ client.connect((err) => {
         console.error(err);
         process.exit(1);
     }
-
     const tryfetchDolarRate = async () => {
         try {
             const dolarRate = await fetchDolarRate();
@@ -24,13 +28,12 @@ client.connect((err) => {
             res.json({ message: err })
         }
     }
-    const db = client.db('yourDatabase');
-    const collection = db.collection('yourCollection');
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
     router.post('/', (req, res) => {
         new CronJob('0 0 1 1 *', async () => {
             try {
-                // הוספת נתונים חדשים למסד הנתונים
-                const newDocument = tryfetchDolarRate
+                 const newDocument = { data : data , average :average  }
                 await collection.insertOne(newDocument);
                 res.send("success insetation")
             } catch (error) {

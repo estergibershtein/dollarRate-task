@@ -10,12 +10,12 @@ const MonthScroll = () => {
     });
     const handleMonthClick = async (month) => {
         console.log(`Selected month: ${month}`);
-        // setData(month);
 
         try {
             await fetch(`http://localhost:8080/dollarValue/${month}`)
                 .then((res) => res.json())
                 .then((data) => setData(data.average));
+
         } catch (error) {
             console.error(error);
         }
@@ -36,7 +36,8 @@ const MonthScroll = () => {
                         );
                     })}
                 </ul>
-            </div></div>
+            </div>
+        </div>
 
     );
 };

@@ -17,8 +17,11 @@ const fetchDolarRate = async (date) => {
 
 router.get('/', async (req, res)=> {
     try {
-    const dolarRate = await fetchDolarRate("01/01/2023");
-    res.json(dolarRate.data.ILS.value)
+      const date="01/01/2023"
+      const dolarRate = await fetchDolarRate(date);
+      const dollarValue=  dolarRate.data.ILS.value
+
+    res.json(dollarValue)
     return dolarRate
   } catch (err) {
     res.json({message: err})
