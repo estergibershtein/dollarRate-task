@@ -1,17 +1,17 @@
+import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { Data } from "./Components/data";
 import "./index";
 import LineChart from "./Components/LineChart";
 import MonthScroll from './Components/MonthScroll'
-import DollarTable from './Components/DollarTable'
-import React, { useState, useEffect } from "react";
+ import EstimatAverage from './Components/EsimentAverage'
+import SortData from './Components/SortData'
 import "./App.css";
 Chart.register(CategoryScale);
 
 function App() {
   const [data, setData] = useState();
-
   useEffect(() => {
     fetch("http://localhost:8080/data")
       .then((res) => res.json())
@@ -42,10 +42,10 @@ function App() {
 
   return (
     <div className="App">
-
+ <SortData/>
       <LineChart chartData={chartData} />
+      <EstimatAverage />
       <MonthScroll />
-      <DollarTable />
     </div>
 
   );

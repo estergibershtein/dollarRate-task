@@ -41,9 +41,8 @@ router.get('/:month', async (req, res) => {
         await client.connect();
         const database = client.db(dbName);
         const newItem = database.collection(collectionName);
-        const newNumMonth  = `01/${numMonth}/24`
+        const newNumMonth  = `01/${numMonth}/2024`
         const dollarValue = await newItem.findOne({ date: newNumMonth });
-        console.log(dollarValue,"dollar");
         res.json(dollarValue);
         client.close();
     } catch (error) {

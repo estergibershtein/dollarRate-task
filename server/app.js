@@ -16,11 +16,11 @@ const PORT = process.env.PORT
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
-// app.use('/data', getData);
-// app.use('/dollarValue', geavaregeBymonth);
-// app.use('/api', dollarRoute);
-// app.use('/insert', insertToDb);
-// app.use('/getRate', ApiGetDollarRate);
+app.use('/data', getData);
+app.use('/dollarValue', geavaregeBymonth);
+app.use('/api', dollarRoute);
+app.use('/insert', insertToDb);
+app.use('/getRate', ApiGetDollarRate);
 app.use('/Estimat', apiedForecast );
 
 

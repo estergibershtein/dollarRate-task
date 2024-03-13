@@ -1,8 +1,11 @@
 const MongoClient = require('mongodb').MongoClient
 const express = require("express");
 const router = express.Router();
+require('dotenv').config();
 
-const client = new MongoClient('mongodb://172.17.0.4:27017/', {
+const IpAdress = process.env.IpAdress
+
+const client = new MongoClient(IpAdress, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
