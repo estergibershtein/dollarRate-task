@@ -40,6 +40,7 @@ const MonthScroll = () => {
         </div>
 
     );
+    
 };
 
 export default MonthScroll;

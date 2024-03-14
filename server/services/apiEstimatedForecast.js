@@ -9,20 +9,14 @@ const MongoClient = require('mongodb').MongoClient
 const dbName = 'mydb'
 const collectionName = 'AverageMonthlyDollar'
 const IpAdress = process.env.IpAdress
-
-
-const client = new MongoClient(IpAdress, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+const { connect ,close, getClient} =require('../db/ConnectToDb')
 
 let dollarValue = []
-let month
 
 router.get('/', async (req, res) => {
     try {
-        await client.connect();
-        const database = client.db(dbName);
+        await connect();
+        const database = getClient().db(dbName);
         const findMany = database.collection(collectionName);
 
         const currentDate = new Date()
@@ -35,7 +29,7 @@ router.get('/', async (req, res) => {
         const results = await findMany.find({ date: { $in: dollarValue } }, { average: 1, _id: 0 }).toArray()
         esimmatAvarege = ((results[0].average + results[1].average + results[2].average) / 3).toFixed(2)
         res.json(esimmatAvarege);
-        client.close();
+        close();
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

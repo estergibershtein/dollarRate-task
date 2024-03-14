@@ -5,7 +5,6 @@ import axios from 'axios';
 const SortData = () => {
 
   const [data, setDollarData] = useState([]);
-  const [sortBy, setSortBy] = useState('avgPrice');
 
   let maxData = 0
   let minData = 100
@@ -43,7 +42,7 @@ const SortData = () => {
     <div>
       <button onClick={() => handleMonthClick('date')}>Sort By Date</button>
       <button onClick={() => handleMonthClick('average')}>Sort By Average</button>
-      {<p>{sortBy}</p>}
+      {<p>sortBy</p>}
       <table>
         <thead>
           <tr>

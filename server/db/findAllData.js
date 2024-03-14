@@ -2,27 +2,24 @@ const MongoClient = require('mongodb').MongoClient
 const express = require("express");
 const router = express.Router();
 require('dotenv').config();
+const { connect ,close, getClient} =require('./ConnectToDb')
 
-const IpAdress = process.env.IpAdress
-
-const client = new MongoClient(IpAdress, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+const dbName = process.env.dbName
+const collectionName = process.env.collectionName
 
 router.get('/', async (req, res) => {
     try {
-        await client.connect();
-        const database = client.db("mydb");
-        const newData = database.collection("AverageMonthlyDollar");
+        await connect();
+        const database = getClient().db(dbName);
+        const newData = database.collection(collectionName);
          const data = await newData.find({}).toArray()
-        res.json(data);
+         res.json(data);
 
     } catch (err) {
         res.status(500).send(err);
     }
     finally {
-        client.close();
+        close();
 
     }
 });
