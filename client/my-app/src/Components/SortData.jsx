@@ -40,9 +40,10 @@ const SortData = () => {
   }, []);
   return (
     <div>
-      <button onClick={() => handleMonthClick('date')}>Sort By Date</button>
-      <button onClick={() => handleMonthClick('average')}>Sort By Average</button>
-      {<p>sortBy</p>}
+      {<h2>sort data By</h2>}
+      <button onClick={() => handleMonthClick('date')}>Date</button>
+      <button onClick={() => handleMonthClick('average')}>Average</button>
+
       <table>
         <thead>
           <tr>

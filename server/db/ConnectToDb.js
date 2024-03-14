@@ -10,8 +10,8 @@ const collectionName = 'AverageMonthlyDollar'
 
 
 let client = new MongoClient(IpAdress, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 const connect = async () => {
@@ -27,21 +27,21 @@ const close = async () => {
 
 const getClient = () => client;
 
-async function creatDb() {
+async function creatCollection() {
 
-MongoClient.connect(IpAdress, function (err, db) {
+  MongoClient.connect(IpAdress, function (err, db) {
     if (err) throw err;
     var dbo = db.db(dbName);
     dbo.createCollection(collectionName, function (err, res) {
-        if (err) throw err;
-        console.log("Collection created!");
-        db.close();
+      if (err) throw err;
+      console.log("Collection created!");
+      db.close();
     });
-});
+  });
 }
 module.exports = {
-    connect,
-    close,
-    getClient,
-    creatDb
-  };
+  connect,
+  close,
+  getClient,
+  creatCollection
+};

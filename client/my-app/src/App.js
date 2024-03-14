@@ -4,8 +4,7 @@ import { CategoryScale } from "chart.js";
 import { Data } from "./Components/data";
 import "./index";
 import LineChart from "./Components/LineChart";
-import MonthScroll from './Components/MonthScroll'
- import EstimatAverage from './Components/EsimentAverage'
+import EstimatAverage from './Components/EsimentAverage'
 import SortData from './Components/SortData'
 import MyDatePickerComponent from './Components/MyDatePickerComponent'
 import "./App.css";
@@ -45,10 +44,10 @@ function App() {
       <SortData/>
       <LineChart chartData={chartData} />
       <EstimatAverage />
-      <MonthScroll />
-      <MyDatePickerComponent />
+       <MyDatePickerComponent />
     </div>
 
   );
 }
-export default App;
+ export default App;
+

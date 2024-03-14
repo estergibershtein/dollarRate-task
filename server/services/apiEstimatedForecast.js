@@ -2,14 +2,10 @@ const { subMonths, format } = require('date-fns');
 const express = require("express");
 const router = express.Router();
 require('dotenv').config();
-
-const MongoClient = require('mongodb').MongoClient
-
+const { connect, close, getClient } = require('../db/ConnectToDb')
 
 const dbName = 'mydb'
 const collectionName = 'AverageMonthlyDollar'
-const IpAdress = process.env.IpAdress
-const { connect ,close, getClient} =require('../db/ConnectToDb')
 
 let dollarValue = []
 
