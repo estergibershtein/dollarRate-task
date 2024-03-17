@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import './../App.css'
 
 const SortData = () => {
 
@@ -19,7 +19,7 @@ const SortData = () => {
   });
 
   const sortByDate = [...data].sort((a, b) => new Date(b.date) - new Date(a.date));
-  const sortByAvaerage = [...data].sort((a, b) => b.average - a.average);
+  const sortByAvaerage = [...data].sort((a, b) => a.average - b.average);
 
   const handleMonthClick = (option) => {
 
@@ -40,11 +40,12 @@ const SortData = () => {
   }, []);
   return (
     <div>
-      {<h2>sort data By</h2>}
+
+      {<h2>Sort data by:</h2>}
       <button onClick={() => handleMonthClick('date')}>Date</button>
       <button onClick={() => handleMonthClick('average')}>Average</button>
 
-      <table>
+      <table className='table' >
         <thead>
           <tr>
             <th>date</th>
