@@ -8,6 +8,7 @@ const dbName = 'mydb'
 const collectionName = 'AverageMonthlyDollar'
 
 let arrayDate = []
+
 function getDates(currentDate) {
     Array.from({ length: 3 }, (_, index) => {
         let date = subMonths(currentDate, index + 1);
@@ -25,9 +26,7 @@ router.get('/', async (req, res) => {
 
         const currentDate = new Date()
 
-
-
-        const results = await findMany.find({ date: { $in: getDates(currentDate) } }, { average: 1, _id: 0 }).toArray()
+        const results = await findMany.find({ date: { $in: getDates(currentDate)} }, { average: 1, _id: 0 }).toArray()
         esimmatAvarege = ((results[0].average + results[1].average + results[2].average) / 3).toFixed(2)
         res.json(esimmatAvarege);
         close();
