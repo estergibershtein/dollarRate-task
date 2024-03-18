@@ -1,6 +1,6 @@
-const MongoClient = require('mongodb').MongoClient
 const express = require("express");
-const router = express.Router();
+const router = express.Router()
+;
 require('dotenv').config();
 const { connect, close, getClient } = require('./ConnectToDb')
 

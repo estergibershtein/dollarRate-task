@@ -5,8 +5,8 @@ const router = express.Router();
 const MongoClient = require('mongodb').MongoClient
 const IpAdress = process.env.IpAdress
 
-const dbName = 'mydb'
-const collectionName = 'AverageMonthlyDollar'
+const dbName = process.env.dbName
+const collectionName = process.env.collectionName
 
 
 let client = new MongoClient(IpAdress, {
@@ -42,6 +42,5 @@ async function creatCollection() {
 module.exports = {
   connect,
   close,
-  getClient,
-  creatCollection
+  getClient
 };

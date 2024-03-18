@@ -5,9 +5,9 @@ const app = express();
 
 const getData = require('./db/findAllData.js')
 const insertToDb = require('./db/iInsertToDb.js')
-const geavaregeBymonth = require('./db/findByMonth')
+const getAvaregeBymonth = require('./db/findByMonth')
 const apiedForecast = require('./services/apiEstimatedForecast')
-
+const apiEstimatAllData  = require('./db/allForecast')
 const PORT = process.env.PORT
 
 app.use(express.urlencoded({ extended: true }));
@@ -15,8 +15,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/data', getData);
-app.use('/dollarValue', geavaregeBymonth);
+app.use('/dollarValue', getAvaregeBymonth);
 app.use('/Estimat', apiedForecast );
+app.use('/EstimatAllData', apiEstimatAllData );
 
 
 app.get('/', (res, req)=> {
