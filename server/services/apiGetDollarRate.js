@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 require('dotenv').config();
 
-const API_KEY = "cur_live_L4xWROrxqd64HCLs4CPIrgx0gyfnpeBpV8TCuJKk";
+const API_KEY =  process.env.CUR_LIVE
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 var requestOptions = {
   method: 'GET',

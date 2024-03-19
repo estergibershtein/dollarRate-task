@@ -33,8 +33,7 @@ async function creatCollection() {
     if (err) throw err;
     var dbo = db.db(dbName);
     dbo.createCollection(collectionName, function (err, res) {
-      if (err) throw err;
-      console.log("Collection created!");
+      if (err) throw new Error( `Error creating collection`);
       db.close();
     });
   });
@@ -43,4 +42,5 @@ module.exports = {
   connect,
   close,
   getClient
+  
 };
