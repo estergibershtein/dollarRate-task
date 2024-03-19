@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './../App.css'
 
+const URL = process.env.REACT_APP_URL;
+
 const SortData = () => {
 
   const [data, setDollarData] = useState([]);
@@ -26,10 +28,10 @@ const SortData = () => {
     option === 'date' ? setDollarData(sortByDate) : setDollarData(sortByAvaerage)
 
   }
-
   useEffect(() => {
+    const url = `${URL}/data`
 
-    axios.get('http://localhost:8080/data')
+    axios.get(url)
       .then(response => {
         setDollarData(response.data)
 
@@ -37,11 +39,11 @@ const SortData = () => {
       .catch(error => {
         console.error(error);
       });
-  }, []);
+  },[]);
   return (
     <div>
 
-      {<h2>Sort data by:</h2>}
+      {<h3>Sort data by:</h3>}
       <button onClick={() => handleMonthClick('date')}>Date</button>
       <button onClick={() => handleMonthClick('average')}>Average</button>
 

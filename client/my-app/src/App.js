@@ -3,8 +3,9 @@ import { CategoryScale } from "chart.js";
 import "./index";
 import EstimatAverage from './Components/EsimentAverage'
 import SortData from './Components/SortData'
-import MyDatePickerComponent from './Components/MyDatePickerComponent'
+import DatePickerComponent from './Components/DatePickerComponent'
 import ChartData from "./Components/ChrtData";
+import PredictionMatrix from "./Components/PredictionMatrix"
 import "./App.css";
 Chart.register(CategoryScale);
 
@@ -12,13 +13,13 @@ function App() {
 
   return (
     <div className="App">
-      Average graph by months 
-      <ChartData />
       <SortData />
+      <PredictionMatrix />
       <EstimatAverage />
-      <MyDatePickerComponent />
+      <DatePickerComponent />
+      <ChartData />
     </div>
-
   );
 }
+
 export default App;

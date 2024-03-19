@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const URL = process.env.REACT_APP_URL;
 
 const EsimentAverage = () => {
 
     const [estimatAverage, setEstimatAverage] = useState();
     const handleMonthClick = async () => {
+        const url = `${URL}/Estimat`
 
-        axios.get('http://localhost:8080/Estimat')
+        axios.get(url)
             .then(response => {
                 setEstimatAverage(response.data)
             })
@@ -15,7 +17,6 @@ const EsimentAverage = () => {
                 console.error(error);
             });
     }
-
     return (
 
         <div>

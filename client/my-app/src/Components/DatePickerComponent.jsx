@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const MyDatePickerComponent = () => {
+const URL = process.env.REACT_APP_URL;
+
+const DatePickerComponent = () => {
     const [startDate, setStartDate] = useState();
     const [avgChoosed, setavgChoosed] = useState();
     let minDate = new Date('2023-01-01')
@@ -13,8 +15,10 @@ const MyDatePickerComponent = () => {
         let year = selectedDate.getFullYear();
         setStartDate(selectedDate)
 
+        const url = `${URL}/dollarValue/${month}-${year}`
+
         try {
-            await fetch(`http://localhost:8080/dollarValue/${month}-${year}`)
+            await fetch(url)
                 .then((res) => res.json())
                 .then((data) => setavgChoosed(data.average));
 
@@ -37,4 +41,4 @@ const MyDatePickerComponent = () => {
     );
 };
 
-export default MyDatePickerComponent;
+export default DatePickerComponent;
