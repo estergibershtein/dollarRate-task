@@ -25,6 +25,8 @@ const URL = process.env.REACT_APP_URL;
         const [state, dispatch] = useReducer(reducer, initialState);
         useEffect(() => {
             const url = `${URL}/EstimatAllData`
+            console.log(url);
+
             axios.get(url)
               .then(response => {
                 dispatch({ type: 'SET_DOLLARPREDICT', payload: response.data },6000);
@@ -33,7 +35,6 @@ const URL = process.env.REACT_APP_URL;
                throw new Error("Error: " + error)
               });
         }, []);
-        console.log(state.dollarpredict);
  return (
 
     <PredictionTable dollarpredict={state.dollarpredict}/>
