@@ -1,7 +1,7 @@
 const express = require("express");
 const CronJob = require('cron').CronJob;
 
-const getDolar = require('./../services/ApiGetDollarRate');
+const getDolar = require('../api/apiGetDollarRate');
 const { connect ,close, getClient} =require('./ConnectToDb')
 
 

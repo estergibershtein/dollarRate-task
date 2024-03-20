@@ -1,28 +1,6 @@
-const { subMonths, format } = require('date-fns');
-const express = require("express");
-const router = express.Router();
-require('dotenv').config();
-const { connect, close, getClient } = require('../db/ConnectToDb')
 
-const dbName = process.env.dbName
-const collectionName = process.env.collectionName
 
-router.get('/', async (req, res) => {
-    try {
-        await connect();
-        const database = getClient().db(dbName);
-        const newData = database.collection(collectionName);
-        let data = await newData.find({}).toArray()
-        data = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
-        let PredictedAverage = getPredictedAverage(data)
-        res.json(PredictedAverage)
-    } catch (err) {
-        res.status(500).send(err);
-    }
-    finally {
-        await close();
-    }
-})
+const { subMonths} = require('date-fns');
 
 function getPredictedAverage(allData) {
     let arrayDate = []
@@ -66,4 +44,16 @@ function findAvgByDates(allData, dates) {
 
 }
 
-module.exports = router;
+
+
+function getArrayDates(currentDate) {
+    let arrayDate = []
+    Array.from({ length: 3 }, (_, index) => {
+        let date = subMonths(currentDate, index + 1);
+        arrayDate[index] = date.getMonth() < 10 ? arrayDate[index] = `01/0${date.getMonth() + 1}/${date.getFullYear()}` :
+            `01/${date.getMonth() + 1}/${date.getFullYear()}`
+    });
+    return arrayDate
+} 
+
+module.exports = {findAvgByDates ,getPredictedAverage ,convertDateFormat ,getArrayDates ,getDates}

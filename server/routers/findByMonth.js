@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 require('dotenv').config();
 
-const { connect, close, getClient } = require('./ConnectToDb')
+const { connect, close, getClient } = require('../db/ConnectToDb')
 
 const dbName = process.env.dbName
 const collectionName = process.env.collectionName

@@ -7,11 +7,12 @@ const URL = process.env.REACT_APP_URL;
 const DatePickerComponent = () => {
     const [startDate, setStartDate] = useState();
     const [avgChoosed, setavgChoosed] = useState();
+    let month
     let minDate = new Date('2023-01-01')
     let maxData = new Date()
     const handleChange = async (selectedDate) => {
-        let month = selectedDate.getMonth() + 1;
-        month < 10 ? month = '0' + month : month = month + 1;
+        month = selectedDate.getMonth() + 1;
+        month < 10 ? month = '0' + month : month = month ;
         let year = selectedDate.getFullYear();
         setStartDate(selectedDate)
 
