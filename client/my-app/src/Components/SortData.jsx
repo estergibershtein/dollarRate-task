@@ -58,7 +58,7 @@ const SortData = () => {
           {data.map((dollar, index) => (
             <tr key={index}>
               <td>{dollar.date}</td>
-              <td style={{ 'backgroundColor': dollar.average === maxData ? 'green' : dollar.average === minData ? 'red' : 'white' }}>{dollar.average}</td>
+              <td style={{ 'color': dollar.average === maxData ? 'green' : dollar.average === minData ? 'red' : 'black' }}>{dollar.average}</td>
             </tr>
           ))}
         </tbody>

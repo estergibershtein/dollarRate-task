@@ -1,29 +1,26 @@
 require('dotenv').config();
 
-const express = require("express");
-const router = express.Router();
 const MongoClient = require('mongodb').MongoClient
 const IpAdress = process.env.IpAdress
 
 const dbName = process.env.dbName
 const collectionName = process.env.collectionName
 
-
 let client = new MongoClient(IpAdress, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+})
 
 const connect = async () => {
   if (!IpAdress) throw new Error('URL is required');
   client = new MongoClient(IpAdress);
   await client.connect();
-};
+} 
 
 const close = async () => {
   if (!client) throw new Error('Client is never connected');
   await client.close();
-};
+} 
 
 const getClient = () => client;
 

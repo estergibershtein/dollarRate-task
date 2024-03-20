@@ -33,11 +33,11 @@ const URL = process.env.REACT_APP_URL;
                throw new Error("Error: " + error)
               });
         }, []);
+        console.log(state.dollarpredict);
  return (
 
     <PredictionTable dollarpredict={state.dollarpredict}/>
  )    
-      
     };
 
 export default PredictionMatrix;

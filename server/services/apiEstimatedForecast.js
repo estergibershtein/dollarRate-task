@@ -16,7 +16,7 @@ function getDates(currentDate) {
             `01/${date.getMonth() + 1}/${date.getFullYear()}`
     });
     return arrayDate
-}
+} 
 
 router.get('/', async (req, res) => {
     try {

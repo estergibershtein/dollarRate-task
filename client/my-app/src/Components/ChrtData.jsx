@@ -6,14 +6,13 @@ import './../App.css'
 const URL = process.env.REACT_APP_URL;
 
 const CahrtData = () => {
-    const url = `${URL}/data`
     const [data, setData] = useState();
+    const url = `${URL}/data`
     useEffect(() => {
         fetch(url)
             .then((res) => res.json())
             .then((data) => setData(data));
     });
-
     return (
         <div className="CharData">
             <h2 >Israeli Shekel per 1 US Dollar Monthly average</h2>

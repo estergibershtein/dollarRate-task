@@ -7,7 +7,6 @@ const { connect, close, getClient } = require('../db/ConnectToDb')
 const dbName = process.env.dbName
 const collectionName = process.env.collectionName
 
-
 router.get('/', async (req, res) => {
     try {
         await connect();
@@ -44,6 +43,7 @@ function convertDateFormat(inputDate) {
     const [day, month, year] = parts;
     return `${month}/${day}/${year}`;
 }
+
 function getDates(currentDate) {
     let arrayDate = []
     let date = ""
